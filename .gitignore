@@ -1,0 +1,24 @@
+# AL Project gitignore
+
+# Build results
+.alpackages/
+.alcache/
+*.app
+
+# Snapshots
+.snapshots/
+
+# VS Code settings (optional - uncomment if you don't want to share settings)
+# .vscode/
+
+# Translation files
+*.g.xlf
+
+# Temporary files
+*.tmp
+*.bak
+*~
+
+# OS generated files
+.DS_Store
+Thumbs.db

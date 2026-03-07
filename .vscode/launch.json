@@ -1,0 +1,34 @@
+{
+    "configurations": [
+{
+            "name": "Publish: PREVIEW",
+            "type": "al",
+            "request": "launch",
+            "environmentType": "Sandbox",
+            "environmentName": "Preview",
+            "startupObjectId": 22,
+            "breakOnError": "All",
+            "breakOnRecordWrite": "None",
+            "launchBrowser": true,
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "tenant": "933cfc4a-d0a3-4022-862d-3ae4d35d3a89",
+            "numberOfSqlStatements": 10
+        },{
+            "name": "Attach: PREVIEW",
+            "type": "al",
+            "request": "attach",
+            "environmentType": "Sandbox",
+            "environmentName": "sandbox",
+            "breakOnError": "All",
+            "breakOnRecordWrite": "None",
+            "enableSqlInformationDebugger": true,
+            "enableLongRunningSqlStatements": true,
+            "longRunningSqlStatementsThreshold": 500,
+            "numberOfSqlStatements": 10,
+            "tenant": "933cfc4a-d0a3-4022-862d-3ae4d35d3a89",
+            "breakOnNext": "WebServiceClient"
+        }
+    ]
+}
