@@ -7,7 +7,7 @@
 /// List page for managing document attachments with external storage information.
 /// Provides actions for upload, download, and deletion operations.
 /// </summary>
-page 50000 "Document Attachment - External"
+page 50001 "Document Attachment - External"
 {
     PageType = List;
     SourceTable = "Document Attachment";

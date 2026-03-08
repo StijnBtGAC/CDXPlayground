@@ -16,9 +16,9 @@ controladdin "DA Drag Drop Control"
     VerticalStretch = false;
     VerticalShrink = true;
 
-    Scripts = 'src\DocumentAttachmentIntegration\Scripts\DADragDropControl.js';
-    StyleSheets = 'src\DocumentAttachmentIntegration\Styles\DADragDropControl.css';
-    StartupScript = 'src\DocumentAttachmentIntegration\Scripts\DADragDropStartup.js';
+    Scripts = 'src\DragDropControl\Scripts\DADragDropControl.js';
+    StyleSheets = 'src\DragDropControl\Styles\DADragDropControl.css';
+    StartupScript = 'src\DragDropControl\Scripts\DADragDropStartup.js';
 
     /// <summary>
     /// Event triggered when files are dropped on the control.
