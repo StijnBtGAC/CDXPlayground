@@ -1,0 +1,147 @@
+/* ------------------------------------------------------------------------------------------------
+   Copyright (c) Microsoft Corporation. All rights reserved.
+   Licensed under the MIT License. See License.txt in the project root for license information.
+   ------------------------------------------------------------------------------------------------ */
+
+.drag-drop-zone {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 180px;
+    border: 3px dashed #0078d4;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #f3f9ff 0%, #e6f3ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 120, 212, 0.1);
+    position: relative;
+}
+
+.drag-drop-zone::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 12px;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 120, 212, 0.03) 10px,
+        rgba(0, 120, 212, 0.03) 20px
+    );
+    pointer-events: none;
+}
+
+.drag-drop-zone:hover {
+    background: linear-gradient(135deg, #e6f3ff 0%, #cce5ff 100%);
+    border-color: #005a9e;
+    box-shadow: 0 4px 12px rgba(0, 120, 212, 0.2);
+    transform: translateY(-1px);
+}
+
+.drag-drop-zone.drag-over {
+    background: linear-gradient(135deg, #cce5ff 0%, #b3d9ff 100%);
+    border-color: #0046d5;
+    border-style: solid;
+    border-width: 4px;
+    transform: scale(1.02);
+    box-shadow: 0 6px 16px rgba(0, 120, 212, 0.3);
+}
+
+.drag-drop-zone.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-color: #cccccc;
+}
+
+.drag-drop-zone.disabled:hover {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-color: #cccccc;
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.drop-icon {
+    margin-bottom: 12px;
+    line-height: 1;
+    position: relative;
+    z-index: 1;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+.drop-message {
+    font-size: 16px;
+    color: #323130;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    line-height: 1.5;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.drop-message strong {
+    color: #0078d4;
+    font-weight: 600;
+}
+
+.drop-secondary-message {
+    font-size: 12px;
+    color: #605e5c;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+}
+
+.drag-drop-zone.drag-over .drop-message {
+    color: #0046d5;
+}
+
+.drag-drop-zone.drag-over .drop-message strong {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.drag-drop-zone.drag-over .drop-icon {
+    animation: none;
+    transform: scale(1.1);
+}
+
+.drag-drop-zone.drag-over .drop-icon svg path {
+    fill: #0046d5;
+}
+
+.drag-drop-zone.disabled .drop-message {
+    color: #a6a6a6;
+}
+
+.drag-drop-zone.disabled .drop-message strong {
+    color: #a6a6a6;
+}
+
+.drag-drop-zone.disabled .drop-icon svg path {
+    fill: #a6a6a6;
+}
