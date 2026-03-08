@@ -19,14 +19,7 @@
       "publisher": "Microsoft"
     }
   ],
-  "dependencies": [
-    {
-      "id": "437dbf0e-84ff-417a-965d-ed2bb9650972",
-      "name": "Base Application",
-      "publisher": "Microsoft",
-      "version": "28.0.0.0"
-    }
-  ],
+  "dependencies": [],
   "screenshots": [],
   "idRanges": [
     {
