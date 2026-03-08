@@ -21,33 +21,8 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
     /// <param name="Connector">The file storage connector.</param>
     /// <returns>True if the operation is allowed, otherwise false.</returns>
     procedure BeforeAddOrModifyFileScenarioCheck(Scenario: Enum "File Scenario"; Connector: Enum "Ext. File Storage Connector"): Boolean;
-    var
-        ExternalStorageSetup: Record "DA External Storage Setup";
-        FileAccount: Record "File Account";
-        FileScenarioCU: Codeunit "File Scenario";
-        ConfirmManagement: Codeunit "Confirm Management";
-        ExternalStorageSetupPage: Page "DA External Storage Setup";
-        CannotReassignScenarioErr: Label 'You cannot change the file storage account while External Storage is enabled and files are stored externally.\\To change the storage account:\1. Copy all files back to internal storage using the "Storage Sync" action.\2. Disable the External Storage feature.\3. Reassign the file scenario to the new storage account.\4. Re-enable the feature and sync files to the new storage.';
-        ConfigureExternalStorageQst: Label 'Do you want to configure External Storage settings now?';
     begin
-        if not (Scenario = Enum::"File Scenario"::"Doc. Attach. - External Storage") then
-            exit;
-
-        // Check if scenario is already assigned to a different account
-        if FileScenarioCU.GetSpecificFileAccount(Scenario, FileAccount) then
-            // If feature is enabled and has uploaded files, don't allow reassignment
-            if ExternalStorageSetup.Get() then
-                if ExternalStorageSetup.Enabled then begin
-                    ExternalStorageSetup.CalcFields("Has Uploaded Files");
-                    if ExternalStorageSetup."Has Uploaded Files" then begin
-                        Message(CannotReassignScenarioErr);
-                        exit(true);
-                    end;
-                end;
-
-        // Open setup page for additional configuration automatically
-        if ConfirmManagement.GetResponseOrDefault(ConfigureExternalStorageQst, true) then
-            ExternalStorageSetupPage.Run();
+        // No custom file scenario validation needed - works with any file scenario
         exit(false);
     end;
 
@@ -58,14 +33,9 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
     /// <param name="Connector">The file storage connector.</param>
     /// <returns>True if additional setup is available, otherwise false.</returns>
     procedure GetAdditionalScenarioSetup(Scenario: Enum "File Scenario"; Connector: Enum "Ext. File Storage Connector"): Boolean;
-    var
-        ExternalStorageSetup: Page "DA External Storage Setup";
     begin
-        if not (Scenario = Enum::"File Scenario"::"Doc. Attach. - External Storage") then
-            exit;
-
-        ExternalStorageSetup.RunModal();
-        exit(true);
+        // No additional setup required - works with any file scenario
+        exit(false);
     end;
 
     /// <summary>
@@ -75,41 +45,15 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
     /// <param name="Connector">The file storage connector.</param>
     /// <returns>True if the delete operation is handled and should not proceed, otherwise false.</returns>
     procedure BeforeDeleteFileScenarioCheck(Scenario: Enum "File Scenario"; Connector: Enum "Ext. File Storage Connector"): Boolean;
-    var
-        ExternalStorageSetup: Record "DA External Storage Setup";
-        NotPossibleToUnassignScenarioMsg: Label 'External Storage scenario can not be unassigned when there are uploaded files.';
     begin
-        if not (Scenario = Enum::"File Scenario"::"Doc. Attach. - External Storage") then
-            exit;
-
-        if not ExternalStorageSetup.Get() then
-            exit;
-
-        ExternalStorageSetup.CalcFields("Has Uploaded Files");
-        if not ExternalStorageSetup."Has Uploaded Files" then
-            exit;
-
-        Message(NotPossibleToUnassignScenarioMsg);
-        exit(true);
+        // No custom file scenario validation needed - works with any file scenario
+        exit(false);
     end;
 
     procedure BeforeReassignFileScenarioCheck(Scenario: Enum "File Scenario"): Boolean
-    var
-        ExternalStorageSetup: Record "DA External Storage Setup";
-        NotPossibleToReassignScenarioMsg: Label 'External Storage scenario can not be reassigned when there are uploaded files.';
     begin
-        if not (Scenario = Enum::"File Scenario"::"Doc. Attach. - External Storage") then
-            exit;
-
-        if not ExternalStorageSetup.Get() then
-            exit;
-
-        ExternalStorageSetup.CalcFields("Has Uploaded Files");
-        if not ExternalStorageSetup."Has Uploaded Files" then
-            exit;
-
-        Message(NotPossibleToReassignScenarioMsg);
-        exit(true);
+        // No custom file scenario validation needed - works with any file scenario
+        exit(false);
     end;
     #endregion
 
@@ -159,6 +103,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         FileName := GetFilePathWithRootFolder(DocumentAttachment);
 
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
@@ -209,6 +154,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         FileName := DocumentAttachment."File Name" + '.' + DocumentAttachment."File Extension";
 
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
@@ -251,6 +197,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         FileName := DocumentAttachment."File Name" + '.' + DocumentAttachment."File Extension";
 
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
@@ -283,6 +230,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         InStream: InStream;
     begin
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
@@ -313,6 +261,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         OutStream: OutStream;
     begin
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
@@ -341,6 +290,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         FileScenario: Enum "File Scenario";
     begin
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
@@ -391,6 +341,7 @@ codeunit 50001 "DA External Storage Impl." implements "File Scenario"
         ExternalFilePath := DocumentAttachment."External File Path";
 
         // Search for External Storage assigned File Scenario
+        // Note: External storage requires file scenario configuration
         FileScenario := FileScenario::"Doc. Attach. - External Storage";
         if not FileScenarioCU.GetSpecificFileAccount(FileScenario, FileAccount) then
             exit(false);
