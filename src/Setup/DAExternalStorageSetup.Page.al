@@ -83,12 +83,25 @@ page 50000 "DA External Storage Setup"
                 end;
             }
         }
+        area(Navigation)
+        {
+            action(DocumentAttachments)
+            {
+                Caption = 'Document Attachments';
+                Image = Document;
+                ToolTip = 'Open the document attachment list with information about the external storage.';
+                RunObject = page "Document Attachment - External";
+            }
+        }
         area(Promoted)
         {
             actionref(StorageSync_Promoted; StorageSync)
             {
             }
             actionref(MigrateFiles_Promoted; MigrateFiles)
+            {
+            }
+            actionref(DocumentAttachments_Promoted; DocumentAttachments)
             {
             }
         }

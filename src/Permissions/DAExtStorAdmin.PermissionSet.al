@@ -7,7 +7,7 @@
 /// Permission set for External Storage functionality.
 /// Grants necessary permissions to use external storage features.
 /// </summary>
-permissionset 50001 "DA Ext. Stor. Admin"
+permissionset 50000 "DA Ext. Stor. Admin"
 {
     Assignable = true;
     Caption = 'DA - External Storage Admin';

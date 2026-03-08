@@ -3,10 +3,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // ------------------------------------------------------------------------------------------------
 
+
 /// <summary>
 /// Provides telemetry logging for External Storage - Document Attachments feature.
 /// </summary>
-codeunit 50004 "DA Feature Telemetry"
+codeunit 50000 "DA Feature Telemetry"
 {
     Access = Internal;
 

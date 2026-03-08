@@ -3,6 +3,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 // ------------------------------------------------------------------------------------------------
 
+
+
 /// <summary>
 /// Setup table for External Storage functionality.
 /// Contains configuration settings for automatic upload and deletion policies.

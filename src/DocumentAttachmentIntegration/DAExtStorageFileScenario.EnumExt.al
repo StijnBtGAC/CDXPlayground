@@ -4,12 +4,14 @@
 // ------------------------------------------------------------------------------------------------
 
 /// <summary>
-/// Extends the File Scenario enum to add Document Attachment External Storage scenario.
+/// Extends File Scenario enum with External Storage option.
+/// Allows File Account framework to recognize external storage scenarios.
 /// </summary>
-enumextension 50000 "DA Ext. Storage File Scenario" extends "File Scenario"
+enumextension 50000 "DA Ext. Storage-File Scenario" extends "File Scenario"
 {
     value(50000; "Doc. Attach. - External Storage")
     {
-        Caption = 'Document Attachment - External Storage';
+        Caption = 'Document Attachments - External Storage';
+        Implementation = "File Scenario" = "DA External Storage Impl.";
     }
 }
